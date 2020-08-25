@@ -7,11 +7,13 @@ public class PlayerControl : MonoBehaviour
     public bool canAirControl = false;                      // 在空中时，是否能控制
     public LayerMask groundMask;                            // 定义哪一个Layer是地面
     public Transform m_GroundCheck;                         // 用于判定地面的空物体
+    public Vector2 location;
 
     const float k_GroundedRadius = .1f; // 用于检测地面的小圆形的半径
     private bool m_Grounded;            // 当前是否在地面上
     private bool m_FacingRight = true;  // 玩家是否面朝右边
     private Vector3 m_Velocity = Vector3.zero;
+
 
     const float m_NextGroundCheckLag = 0.1f;    // 起跳后的一小段时间，不能再次起跳。防止连跳的一种解决方案
     float m_NextGroundCheckTime;            // 过了这个时间才可能落地、才能再次起跳
@@ -42,6 +44,8 @@ public class PlayerControl : MonoBehaviour
     {
         bool wasGrounded = m_Grounded;
         m_Grounded = false;
+
+        location = m_Rigidbody2D.position;
 
         // 检测与地面的碰撞
         if (Time.time > m_NextGroundCheckTime)
