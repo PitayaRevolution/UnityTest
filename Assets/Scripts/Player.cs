@@ -8,7 +8,6 @@ public class Player : MonoBehaviour
 {
 
     PlayerControl pc;
-    CameraListener cl;
     Camera camera;
 
     public float speed = 5f;
@@ -19,15 +18,15 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         pc = GetComponent<PlayerControl>();
-        cl = GetComponent<CameraListener>();
         camera = Camera.main;
+        touchPos.x = pc.location.x;
+        touchPos.y = pc.location.y;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        touchPos.x = pc.location.x;
-        touchPos.y = pc.location.y;
+        
     }
 
     // Update is called once per frame
@@ -42,8 +41,8 @@ public class Player : MonoBehaviour
             
         }
 
-        Debug.Log("x: " + touchPos.x + " y: " + touchPos.y);
-        Debug.Log("mx: " + pc.location.x + " my: " + pc.location.y);
+        //Debug.Log("x: " + touchPos.x + " y: " + touchPos.y);
+        //Debug.Log("mx: " + pc.location.x + " my: " + pc.location.y);
 
 
         if (pc.location.x < touchPos.x)
