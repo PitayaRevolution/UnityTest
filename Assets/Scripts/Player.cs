@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     Camera camera;
 
     public float speed = 5f;
-    float move;
+    float move = 0f;
     bool jump;
     Vector3 touchPos;
 
@@ -19,14 +19,17 @@ public class Player : MonoBehaviour
     {
         pc = GetComponent<PlayerControl>();
         camera = Camera.main;
-        touchPos.x = pc.location.x;
-        touchPos.y = pc.location.y;
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        touchPos.x = pc.transform.position.x;
+        touchPos.y = pc.transform.position.y;
         
+
+        Debug.Log("x: " + touchPos.x + " y: " + touchPos.y);
+        Debug.Log("mx: " + pc.transform.position.x + " my: " + pc.transform.position.y);
     }
 
     // Update is called once per frame
@@ -45,10 +48,10 @@ public class Player : MonoBehaviour
         //Debug.Log("mx: " + pc.location.x + " my: " + pc.location.y);
 
 
-        if (pc.location.x < touchPos.x)
-            move = Math.Min(1, touchPos.x - pc.location.x);
+        if (pc.transform.position.x < touchPos.x)
+            move = Math.Min(1, touchPos.x - pc.transform.position.x);
         else
-            move = Math.Max(-1, touchPos.x - pc.location.x);
+            move = Math.Max(-1, touchPos.x - pc.transform.position.x);
     }
 
     void FixedUpdate()
