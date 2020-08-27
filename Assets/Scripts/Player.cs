@@ -35,17 +35,27 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+    }
+
+    void Move()
+    {
         //move = Input.GetAxis("Horizontal");
         //jump = Input.GetButton("Jump");
+        //Debug.Log("move: " + move.ToString());
+
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
             touchPos = camera.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, camera.nearClipPlane));
-            
-        }
 
+        }
         //Debug.Log("x: " + touchPos.x + " y: " + touchPos.y);
         //Debug.Log("mx: " + pc.location.x + " my: " + pc.location.y);
+        if (Input.GetMouseButtonDown(0))
+        {
+            touchPos = camera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.x, camera.nearClipPlane));
+        }
 
 
         if (pc.transform.position.x < touchPos.x)
@@ -56,6 +66,7 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
+        Move();
         move *= speed;
         pc.Move(move, jump);
     }
